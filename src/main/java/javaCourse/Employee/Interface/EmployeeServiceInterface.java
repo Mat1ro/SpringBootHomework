@@ -11,11 +11,5 @@ public interface EmployeeServiceInterface {
 
     Employee findEmployee(String firstName, String lastName);
 
-    Integer getMaxSalaryByDepartment(Integer department);
-
-    Integer getMinSalaryByDepartment(Integer department);
-
-    List<Employee> getAllEmployeesByDepartment(Integer department);
-
     List<Employee> getAllEmployees();
 }

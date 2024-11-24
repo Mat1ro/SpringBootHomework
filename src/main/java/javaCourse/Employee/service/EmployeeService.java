@@ -8,16 +8,13 @@ import javaCourse.Employee.model.Employee;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService implements EmployeeServiceInterface {
 
     private final List<Employee> employees;
-    Integer maximumEmployees = 10;
+    Integer maximumEmployees = 15;
 
     public EmployeeService() {
         this.employees = new ArrayList<>();
@@ -59,30 +56,6 @@ public class EmployeeService implements EmployeeServiceInterface {
         throw new EmployeeNotFoundException("Employee not found: " + firstName + " " + lastName);
     }
 
-    @Override
-    public Integer getMaxSalaryByDepartment(Integer department) {
-        return employees.stream()
-                .filter(employee -> employee.getDepartment().equals(department))
-                .max(Comparator.comparing(Employee::getSalary))
-                .map(Employee::getSalary)
-                .orElse(null);
-    }
-
-    @Override
-    public Integer getMinSalaryByDepartment(Integer department) {
-        return employees.stream()
-                .filter(employee -> employee.getDepartment().equals(department))
-                .min(Comparator.comparing(Employee::getSalary))
-                .map(Employee::getSalary)
-                .orElse(null);
-    }
-
-    @Override
-    public List<Employee> getAllEmployeesByDepartment(Integer department) {
-        return employees.stream()
-                .filter(employee -> Objects.equals(employee.getDepartment(), department))
-                .collect(Collectors.toList());
-    }
 
     @Override
     public List<Employee> getAllEmployees() {
